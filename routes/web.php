@@ -17,6 +17,6 @@ Route::get('/', function () {
 
 Route::post('/projects', function () {
 
-  App\Project::create(['title','description']);
+  App\Project::create(request()->only(['title','description']));
 
 });
