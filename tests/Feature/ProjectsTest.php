@@ -26,8 +26,16 @@ class ProjectsTest extends TestCase
   }
   /** @test */
   public function a_project_requiest_a_title(){
+    $attributes = factory('App\Project')->raw(['title'=>'']);
 
-    $this->post('/projects',array())->assertSessionHasErrors('title');
-    
+    $this->post('/projects',$attributes)->assertSessionHasErrors('title');
+
+  }
+  /** @test */
+  public function a_project_requiest_a_description(){
+    $attributes = factory('App\Project')->raw(['description'=>'']);
+
+    $this->post('/projects',$attributes)->assertSessionHasErrors('description');
+
   }
 }
