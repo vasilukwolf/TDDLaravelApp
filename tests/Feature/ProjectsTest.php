@@ -9,11 +9,20 @@ use Illuminate\Foundation\Testing\WithFaker;
 class ProjectsTest extends TestCase
 {
   use WithFaker,RefreshDatabase;
+
+  /** @test */
+  public function only_authenticated_users_can_create_projects(){
+
+    $attributes = factory('App\Project')->raw();
+
+    $this->post('/projects',$attributes)->assertRedirect('login');
+  }
+
   /** @test */
   public function a_user_can_create_a_project(){
 
     $this->withoutExceptionHandling();
-
+    $this->actingAs(factory('App\User')->create());
     $attributes = [
       'title'=> $this->faker->sentence,
       'description'=> $this->faker->paragraph,
@@ -45,13 +54,5 @@ class ProjectsTest extends TestCase
 
     $this->post('/projects',$attributes)->assertSessionHasErrors('description');
 
-  }
-
-  /** @test */
-  public function a_project_requiest_a_owner(){
-    $this->withoutExceptionHandling();
-    $attributes = factory('App\Project')->raw();
-
-    $this->post('/projects',$attributes)->assertSessionHasErrors('owner');
   }
 }

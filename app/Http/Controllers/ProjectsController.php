@@ -13,15 +13,16 @@ class ProjectsController extends Controller
     }
 
     public function store(){
-
+      //dd('No no no.Im clear consuela');
         $attributes = request()->validate([
           'title'=>'required',
-          'description'=>'required',
-          'owner_id'=>'required'
+          'description'=>'required'
         ]);
 
+        $attributes['owner_id'] = auth()->id;
+
         Project::create($attributes);
-        dd($attributes);
+
         return redirect('/projects');
 
     }
