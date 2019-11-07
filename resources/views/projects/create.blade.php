@@ -16,8 +16,8 @@
         </div>
     </div>
     <div class="control">
-      <button  type="submit" class="button is-primary">Create project</button>
-      <a href="/projects">Canel</a>
+      <button  type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded">Submit project</button>
+      <a href="/projects"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Canel</button></a>
     </div>
   </form>
 @endsection
