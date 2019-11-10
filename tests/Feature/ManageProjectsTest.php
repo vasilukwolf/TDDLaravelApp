@@ -25,7 +25,7 @@ class ManageProjectsTest extends TestCase
   public function a_user_can_create_a_project(){
 
     $this->withoutExceptionHandling();
-    $this->actingAs(factory('App\User')->create());
+    $this->signIn();
     $this->get('/projects/create')->assertStatus(200);
     $attributes = [
       'title'=> $this->faker->sentence,
@@ -40,7 +40,7 @@ class ManageProjectsTest extends TestCase
   /** @test */
   public function a_user_can_view_a_their_project(){
     $this->withoutExceptionHandling();
-    $this->be(factory('App\User')->create());
+    $this->signIn();
     $project = factory('App\Project')->create(['owner_id'=>auth()->id()]);
     $this->get($project->path())
       ->assertSee($project->title)
@@ -49,13 +49,13 @@ class ManageProjectsTest extends TestCase
   /** @test */
   public function a_authenticated_user_cannot_view_a_projects_of_others(){
     // $this->withoutExceptionHandling();
-    $this->be(factory('App\User')->create());
+    $this->signIn();
     $project = factory('App\Project')->create();
     $this->get($project->path())->assertstatus(403);
   }
   /** @test */
   public function a_project_requiest_a_title(){
-    $this->actingAs(factory('App\User')->create());
+    $this->signIn();
     $attributes = factory('App\Project')->raw(['title'=>'']);
 
     $this->post('/projects',$attributes)->assertSessionHasErrors('title');
@@ -63,7 +63,7 @@ class ManageProjectsTest extends TestCase
   }
   /** @test */
   public function a_project_requiest_a_description(){
-    $this->actingAs(factory('App\User')->create());
+    $this->signIn();
     $attributes = factory('App\Project')->raw(['description'=>'']);
 
     $this->post('/projects',$attributes)->assertSessionHasErrors('description');
