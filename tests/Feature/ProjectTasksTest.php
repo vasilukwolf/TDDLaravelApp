@@ -13,10 +13,12 @@ class ProjectTasksTest extends TestCase
 
   /** @test */
   public function a_project_can_have_tasks(){
-      $this->withoutExceptionHandling();
+
       $this->signIn();
 
-      $project = factory(Project::class)->create(['owner_id'=> auth()->id()]);
+      $project = auth()->user()->projects()->create(
+        factory(Project::class)->raw()
+      );
 
       $this->post($project->path().'/tasks',
       ['body' => 'Lorem diamnium super titanium' ]);
@@ -24,4 +26,21 @@ class ProjectTasksTest extends TestCase
       $this->get($project->path())
       ->assertSee('Lorem diamnium super titanium');
   }
+
+  /** @test */
+  public function a_task_requires_a_body(){
+
+    $this->signIn();
+
+    $project = auth()->user()->projects()->create(
+      factory(Project::class)->raw()
+    );
+
+    $attributes = factory('App\Task')->raw(['body'=>'']);
+
+    $this->post($project->path().'/tasks',$attributes)->
+    assertSessionHasErrors('body');
+
+  }
+
 }
