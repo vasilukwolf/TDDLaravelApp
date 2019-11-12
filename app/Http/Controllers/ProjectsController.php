@@ -21,9 +21,9 @@ class ProjectsController extends Controller
 
         //$attributes['owner_id'] = auth()->id();
 
-        auth()->user()->projects()->create($attributes);
+        $project = auth()->user()->projects()->create($attributes);
 
-        return redirect('/projects');
+        return redirect($project->path());
 
     }
 
