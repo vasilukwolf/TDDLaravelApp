@@ -29,6 +29,7 @@ class ProjectTasksTest extends TestCase
 
   /** @test */
   public function a_project_can_be_updated(){
+
     $this->withoutExceptionHandling();
     $this->signIn();
 
@@ -40,12 +41,12 @@ class ProjectTasksTest extends TestCase
 
     $this->patch($project->path().'/tasks/',[
       'body' => 'changed',
-      'completed'=>true,
+      'completed'=> True,
     ]);
 
     $this->assertDatabaseHas('tasks',[
       'body' => 'changed',
-      'completed'=>true,
+      'completed'=> True,
     ]);
 
   }

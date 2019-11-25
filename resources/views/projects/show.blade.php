@@ -16,7 +16,7 @@
                 {{--tasks --}}
                 @foreach ($project->tasks as $key => $task)
                 <div class="card mb-3">
-                    <form method="post" action="{{ $project->path().'/tasks/'.$task->id }}">
+                    <form method="POST" action="{{ $project->path().'/tasks/'.$task->id }}">
                         @method('PATCH')
                         @csrf
                         <div class="flex">
