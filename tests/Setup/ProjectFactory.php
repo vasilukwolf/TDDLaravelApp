@@ -2,11 +2,16 @@
 
     namespace Tests\Setup;
 
-    class ProjecFactory
+    use App\Project;
+    use App\Task;
+    use App\User;
+
+    class ProjectFactory
     {
+
       protected $tasksCount = 0;
 
-      public function withTasks(){
+      public function withTasks($count){
         $this->tasksCount = $count;
 
         return $this;
