@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Project;
+use App\Task;
 
 use Illuminate\Http\Request;
 
@@ -16,8 +17,11 @@ class ProjectsController extends Controller
       //dd('No no no.Im clear consuela');
         $attributes = request()->validate([
           'title'=>'required',
-          'description'=>'required'
+          'description'=>'required',
+          'notes'=>'min:3'
         ]);
+
+        //dd($attributes);
 
         //$attributes['owner_id'] = auth()->id();
 
@@ -44,12 +48,19 @@ class ProjectsController extends Controller
     }
 
     public function update(Project $project, Task $task){
-      $task->update([
-            'body' => request('body'),
-            'completed' => request()->has('complited')
+
+      if(auth()->user()->isNot($project->owner)){
+        abort(403);
+      }
+
+      $project->update([
+        'notes' => request('notes')
       ]);
 
-      return redirect($project->path());
+      return view($project->path());
+
     }
+
+
 
 }

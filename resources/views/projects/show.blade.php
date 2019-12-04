@@ -17,8 +17,8 @@
                 @foreach ($project->tasks as $key => $task)
                 <div class="card mb-3">
                     <form method="POST" action="{{ $task->path() }}">
-                        @method('PATCH')
                         @csrf
+                        @method('PATCH')
                         <div class="flex">
                             <input name="body" value="{{ $task->body }}" class="w-full {{ $task->completed ? 'text-grey' : '' }}" />
                             <input name="completed" type="checkbox" onchange="this.form.submit()" {{ $task->completed ? 'checked' : '' }} />
@@ -35,9 +35,19 @@
             </div>
             <div>
                 <h2 class="text-grey  font-normal text-lg">General Notes</h2>
+                <form method="POST" action="{{ $project->path() }}">
+                  @csrf
+                  @method('PATCH')
 
                 {{-- general notes --}}
-                <textarea class="card w-full" style="min-height:200px">Lorem ipsum.</textarea>
+                <textarea class="card w-full mb-5"
+                 style="min-height:200px"
+                  placeholder="Enter information what do you need!">
+                  {{ $project->notes }}
+                </textarea>
+                <button type="submit" class="button">Save note</button>
+                </form>
+              </form>
             </div>
         </div>
         <div class="lg:w-1/4 px-3">
