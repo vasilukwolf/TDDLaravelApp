@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Project;
 use App\Task;
+use App\Policies;
 
 use Illuminate\Http\Request;
 
@@ -33,9 +34,7 @@ class ProjectsController extends Controller
 
     public function show(Project $project){
 
-        if(auth()->user()->isNot($project->owner)){
-          abort(403);
-        }
+        $this->authorize('update',$project);
 
         return view('projects.show', compact('project'));
 
@@ -49,15 +48,11 @@ class ProjectsController extends Controller
 
     public function update(Project $project, Task $task){
 
-      if(auth()->user()->isNot($project->owner)){
-        abort(403);
-      }
+      $this->authorize('update',$project);
 
-      $project->update([
-        'notes' => request('notes')
-      ]);
+      $project->update(request(['notes']));
 
-      return view($project->path());
+      return redirect($project->path());
 
     }
 
