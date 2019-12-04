@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Facades\Tests\Setup\ProjectFactory;
+use Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 
 class ProjectTasksTest extends TestCase
@@ -34,7 +34,6 @@ class ProjectTasksTest extends TestCase
     $this->withoutExceptionHandling();
 
     $project = app(ProjectFactory::class)->withTasks(1)->create();
-    \var_dump($project);
     $this->signIn();
 
     // $project = auth()->user()->projects()->create(
@@ -43,7 +42,7 @@ class ProjectTasksTest extends TestCase
     //
     // $task = $project->addTask('test task');
 
-    $this->patch($project->path().'/tasks/'.$task->id,[
+    $this->patch($project->path().'/tasks/'.$project->tasks[0]->id,[
       'body' => 'changed',
       'completed'=> True,
     ]);
