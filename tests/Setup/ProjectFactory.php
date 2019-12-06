@@ -8,7 +8,7 @@
 
     class ProjectFactory
     {
-
+      protected $user;
       protected $tasksCount = 0;
 
       public function withTasks($count){
@@ -17,9 +17,17 @@
         return $this;
       }
 
+      public function ownedBy($user){
+
+          $this->user = $user;
+
+          return $this;
+
+      }
+
       public function create(){
         $project = factory(Project::class)->create([
-          'owner_id' => factory(User::class)
+          'owner_id' => $this->user ?? factory(User::class)
         ]);
 
         factory(Task::class,$this->tasksCount)->create([
