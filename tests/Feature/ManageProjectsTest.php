@@ -87,7 +87,7 @@ class ManageProjectsTest extends TestCase
     // $this->withoutExceptionHandling();
     $this->signIn();
     $project = factory('App\Project')->create();
-    $this->get($project->path(),[])->assertstatus(403);
+    $this->get($project->path())->assertstatus(403);
   }
   /** @test */
   public function a_project_requiest_a_title(){
