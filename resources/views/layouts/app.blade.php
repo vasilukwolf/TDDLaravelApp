@@ -27,7 +27,7 @@
             <div class="container mx-auto">
                 <div class="flex justify-between item-center py-2">
                     <h1>
-                      <a class="navbar-brand" href="{{ url('/') }}">
+                      <a class="navbar-brand" href="{{ url('/projects') }}">
                         <img src="/images/logo.svg" />
                       </a>
                     </h1>
