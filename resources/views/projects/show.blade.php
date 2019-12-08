@@ -47,7 +47,6 @@
                 </textarea>
                 <button type="submit" class="button">Save note</button>
                 </form>
-              </form>
             </div>
         </div>
         <div class="lg:w-1/4 px-3">
