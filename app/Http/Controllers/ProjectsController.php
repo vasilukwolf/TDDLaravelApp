@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Project;
 
+use Illuminate\Http\Request;
+
 class ProjectsController extends Controller
 {
     /**
@@ -77,7 +79,10 @@ class ProjectsController extends Controller
     {
         $this->authorize('update', $project);
 
-        $project->update($this->validateRequest());
+        // dd($this->validateRequest());
+        //
+        // $project->update($this->validateRequest());
+        $project->update(['notes' => request('notes')]); 
 
         return redirect($project->path());
     }
@@ -90,9 +95,9 @@ class ProjectsController extends Controller
     protected function validateRequest()
     {
         return request()->validate([
-            'title' => 'sometimes|required',
-            'description' => 'sometimes|required',
-            'notes' => 'nullable'
+            'title' => 'required',
+            'description' => 'required',
+            'notes' => 'min:3'
         ]);
     }
 }
