@@ -34,18 +34,23 @@
                 </div>
             </div>
             <div>
+              {{-- general notes --}}
                 <h2 class="text-grey  font-normal text-lg">General Notes</h2>
                 <form method="POST" action="{{ $project->path() }}">
-                  @csrf
                   @method('PATCH')
-
-                {{-- general notes --}}
+                  @csrf
                 <textarea class="card w-full mb-5"
                  style="min-height:200px"
-                  placeholder="Enter information what do you need!">
-                  {{ $project->notes }}
-                </textarea>
+                  placeholder="Enter information what do you need!"
+                  name="notes">{{ $project->notes }}</textarea>
                 <button type="submit" class="button">Save note</button>
+                @if($errors->any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+              @endif
                 </form>
             </div>
         </div>

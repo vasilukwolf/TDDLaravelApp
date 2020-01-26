@@ -51,8 +51,8 @@ class ManageProjectsTest extends TestCase
         $this->assertDatabaseHas('projects', $attributes);
         $this->get($project->path())
             ->assertSee($attributes['title'])
-            ->assertSee($attributes['description']);
-        //->assertSee($attributes['notes']);
+            ->assertSee($attributes['description'])
+            ->assertSee($attributes['notes']);
 
     }
 
