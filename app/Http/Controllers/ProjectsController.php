@@ -69,16 +69,14 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Update the project.
+     * Edit the project.
      *
-     * @param  Project $project
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param UpdateProjectRequest $form
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(UpdateProjectRequest $request)
+    public function update(UpdateProjectRequest $form)
     {
-        $request->save();
-        return redirect($request->save()->path());
+        return redirect($form->save()->path());
     }
 
     /**
