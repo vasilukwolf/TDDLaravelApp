@@ -1,5 +1,11 @@
 <?php
 
+\App\Project::created(function($project){
+    \App\Activity::created([
+        'project_id'=> $project->id
+    ]);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
