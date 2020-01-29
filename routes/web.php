@@ -1,7 +1,7 @@
 <?php
 
 \App\Project::created(function($project){
-    \App\Activity::created([
+    \App\Activity::create([
         'project_id'=> $project->id
     ]);
 });

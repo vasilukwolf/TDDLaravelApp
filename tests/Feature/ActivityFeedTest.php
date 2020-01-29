@@ -16,8 +16,7 @@ class ActivityFeedTest extends TestCase
 
         $project = ProjectFactory::create();
 
-        //$this->assertCount(1, $project->activity);
-        $this->assertCount(0, $project->activity);
+        $this->assertCount(1, $project->activity);
 
     }
 }
