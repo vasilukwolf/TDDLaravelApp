@@ -8,6 +8,10 @@ class Task extends Model
 {
     protected $guarded = [];
     protected $touches = ['project'];
+    protected $casts = [
+        'completed' => 'boolean'
+    ];
+
 
     public function project(){
 
@@ -26,21 +30,15 @@ class Task extends Model
         parent::boot();
 
         static::created(function ($task) {
-            Activity::create([
-                'project_id' => $task->project->id,
-                'description' => 'created_task',
-            ]);
+            $task->project->recordActivity('created_task');
         });
+    }
 
-        static::updated(function ($task) {
-            if(! $task->completed) return;
-            Activity::create([
-                'project_id' => $task->project->id,
-                'description' => 'created_task',
-            ]);
-        });
+    public function complete()
+    {
+        $this->update(['completed' => true]);
 
-
+        $this->project->recordActivity('completed_task');
     }
 
 }

@@ -57,6 +57,6 @@ class ActivityFeedTest extends TestCase
 
 
         $this->assertCount(3, $project->activity);
-        //$this->assertEquals('completed_task', $project->activity->last()->description);
+        $this->assertEquals('completed_task', $project->activity->last()->description);
     }
 }
