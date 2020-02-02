@@ -37,15 +37,22 @@ class Project extends Model
         return  $this->tasks()->create(compact('body'));
     }
 
+    protected function activityChanges($description)
+    {
+        if ($description === 'updated') {
+            return [
+                'before' => array_except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
+                'after' => array_except($this->getChanges(), 'updated_at')
+            ];
+        }
+    }
+
 
     public function recordActivity($description)
     {
         $this->activity()->create([
             'description' => $description,
-            'changes' => [
-                'before'=> array_diff($this->old, $this->getAttributes()),
-                'after'=> array_diff($this->getAttributes(),$this->old),
-            ]
+            'changes' => $this->activityChanges($description)
         ]);
     }
 
