@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProjectRequest;
 use App\Project;
-use App\Policies;
 
 class ProjectsController extends Controller
 {
@@ -69,14 +67,35 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Edit the project.
+     * Update the project.
      *
-     * @param UpdateProjectRequest $form
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param  Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(UpdateProjectRequest $form)
+    public function update(Project $project)
     {
-        return redirect($form->save()->path());
+        $this->authorize('update', $project);
+
+        $project->update($this->validateRequest());
+
+        return redirect($project->path());
+    }
+
+    /**
+     * Destroy the project.
+     *
+     * @param  Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Project $project)
+    {
+        $this->authorize('update', $project);
+
+        $project->delete();
+
+        return redirect('/projects');
     }
 
     /**
