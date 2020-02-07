@@ -20,7 +20,6 @@
 
             <a href="{{ $project->path().'/edit' }}" class="button ml-4">Edit Project</a>
         </div>
-        <a href="{{$project->path().'/edit'}}" class="button">Edit projects</a>
     </div>
 </header>
 <main>
