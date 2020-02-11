@@ -18,4 +18,8 @@
             <div>No projects yet.</div>
         @endforelse
     </main>
+    <modal name="hello-world">
+        hello, world!
+    </modal>
+    <a href="" @click.prevent="$modal.show('hello-world')">Show window</a>
 @endsection
