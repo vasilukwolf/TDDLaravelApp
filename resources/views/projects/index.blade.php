@@ -18,7 +18,7 @@
             <div>No projects yet.</div>
         @endforelse
     </main>
-    <modal name="hello-world" classes="p-10 rounded-lg bg-card" height="auto">
+    <modal name="new-project" classes="p-10 rounded-lg bg-card" height="auto">
         <h1 class="font-normal mb-16 text-center text-2xl">Let's start some new</h1>
 
         <div class="flex">
@@ -54,9 +54,9 @@
             </div>
         </div>
         <footer class="flex justify-end">
-            <button class="is-outlined button mr-4 ">Cancel</button>
+            <button class="is-outlined button mr-4 " @click="$modal.hide('new-project')">Cancel</button>
             <button class="button">Create project</button>
         </footer>
     </modal>
-    <a href="" @click.prevent="$modal.show('hello-world')" classes="p-4 bg-card">Show window</a>
+    <a href="" @click.prevent="$modal.show('new-project')" classes="p-4 bg-card">Show window</a>
 @endsection
