@@ -19,7 +19,10 @@
                     <label  class="text-sm block mb-2">Need some super challenge Task</label>
                     <input type="text"
                            class="border border-muted-light py-1 px-2 text-xs p-2 w-full block rounded"
-                           placeholder="Challenge Task 1" v-for="task in tasks">
+                           placeholder="Change Task"
+                           v-for="task in tasks"
+                           v-model="tasks.value"
+                    >
                 </div>
 
                 <button class="inline-flex items-center text-xs" @click="addTask">
@@ -53,7 +56,7 @@
             },
         methods:{
             addTask(){
-                this.tasks.push({"value":''})
+                this.tasks.push({value:''})
             }
         }
     }
