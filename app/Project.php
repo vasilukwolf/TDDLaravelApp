@@ -51,9 +51,10 @@ class Project extends Model
      * @param  string $body
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function addTask($body)
+
+    public function addTasks($tasks)
     {
-        return $this->tasks()->create(compact('body'));
+        return $this->tasks()->createMany($tasks);
     }
 
     public function invite(User $user)

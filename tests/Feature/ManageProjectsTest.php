@@ -116,7 +116,7 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
 
     }
-    /** @test */
+
     /** @test */
     function unauthorized_users_cannot_delete_projects()
     {
